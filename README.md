@@ -5,14 +5,18 @@
 int main()
 {
 	//产生4个0——9的随机数字
-	srand((unsigned int)time(NULL));
 	int a[4];
 	int b[4];
 	int num;
-	a[0] = rand()%9;
-	a[1] = rand()%9;
-	a[2] = rand()%9;
-	a[3] = rand()%9;
+	//a[0]不能为0.
+	do
+	{
+	srand((unsigned int)time(NULL));
+	a[0] = rand()%10;
+	}while(a[0]==0);
+	a[1] = rand()%10;
+	a[2] = rand()%10;
+	a[3] = rand()%10;
 
 	//输入数字的每一位与前面产生的4个随机数进行比较，并给出正确反馈。
 	//不断输入4位数字，直至四位分别与a,b,c,d相等，停止程序。
@@ -28,57 +32,24 @@ int main()
 		 b[2] = (num % 100) /10;
 		 b[3] = num % 10;
 		//比较第一位
-		if(b[0]>a[0])
+		//这里可以将四个比较合并成循环，什么脑子。
+        int i;
+		for(i=0;i<4;i++)
 		{
-			printf("第一位大于正确数字。\n");
-		}
-		else if(b[0]<a[0])
-		{
-			printf("第一位小于正确数字。\n");
-		}
-		else
-		{
-			printf("第一位正确。\n");
-		}
-		//比较第二位
-		if(b[1]>a[1])
-		{
-			printf("第二位大于正确数字。\n");
-		}
-		else if(b[1]<a[1])
-		{
-			printf("第二位小于正确数字。\n");
-		}
-		else
-		{
-			printf("第二位正确。\n");
-		}
-		//比较第三位
-		if(b[2]>a[2])
-		{
-			printf("第三位大于正确数字。\n");
-		}
-		else if(b[2]<a[2])
-		{
-			printf("第三位小于正确数字。\n");
-		}
-		else
-		{
-			printf("第三位正确。\n");
-		}
-		//比较第四位
-		if(b[3]>a[3])
-		{
-			printf("第四位大于正确数字。\n");
-		}
-		else if(b[3]<a[3])
-		{
-			printf("第四位小于正确数字。\n");
-		}
-		else
-		{
-			printf("第四位正确。\n");
+			if(b[i]>a[i])
+			{
+				printf("第%d位大于正确数字。\n",i+1);
+			}
+			else if(b[i]<a[i])
+			{
+				printf("第%d位小于正确数字。\n",i+1);
+			}
+			else
+			{
+				printf("第%d位正确。\n",i+1);
+			}
 		}
 	}while(!(a[0]==b[0] && a[1]==b[1] && a[2]==b[2] && a[3]==b[3]));
-	sleep(2);
+	printf("恭喜你猜对了\n");
+    sleep(2);
 }
